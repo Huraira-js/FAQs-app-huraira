@@ -1,0 +1,80 @@
+.mainHeading {
+  text-align: center;
+}
+.mainBody {
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.contentBody {
+  width: 100%;
+}
+.mainHeading {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.searchInput {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 250px;
+}
+
+.statusFilter,
+.pageSizeSelector {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+
+.statusFilter {
+  width: 200px;
+}
+
+.paginationControls {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pageButton {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pageButton:hover {
+  background-color: #e2e6ea;
+}
+
+.activePageButton {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.activePageButton:hover {
+  background-color: #0056b3;
+}
+.loading{
+  text-align: center;
+}
+.inputs{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+@media screen and (max-width: 1200px) {
+  .contentBody {
+    padding: 20px;
+  }
+}
