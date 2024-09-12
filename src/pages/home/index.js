@@ -4,6 +4,7 @@ import { Container, Table } from "react-bootstrap";
 import classes from "./Home.module.css";
 import moment from "moment";
 import ReactSelect from "react-select";
+import { useDebounce } from "../../components/UseDebounce/UseDebounce";
 
 const Home = () => {
   const [faqs, setFaqs] = useState([]);
@@ -13,6 +14,7 @@ const Home = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const debouncedSearch = useDebounce(searchTerm);
 
   const options = [
     { value: "all", label: "All statuses" },
@@ -22,13 +24,12 @@ const Home = () => {
 
   async function fetchData(
     page = currentPage,
-    search = searchTerm,
+    search = debouncedSearch,
     filter = statusFilter
   ) {
     setLoading(true);
     try {
-      const url =
-        "https://bbfa-2407-aa80-14-9933-edfd-6aa0-ba08-4c09.ngrok-free.app/api/v1/faqs";
+      const url = "https://7l60bxbl-3093.inc1.devtunnels.ms/api/v1/faqs";
       const response = await axios.get(
         `${url}?limit=${10}&page=${page}&search=${search}&status=${filter}`,
         {
@@ -47,25 +48,20 @@ const Home = () => {
       setLoading(false);
     }
   }
-
   useEffect(() => {
-    fetchData(currentPage, searchTerm, statusFilter);
-  }, []);
+    fetchData(1, debouncedSearch, statusFilter);
+    setCurrentPage(1)
+  }, [debouncedSearch]);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    setCurrentPage(1);
-    setTimeout(() => {
-      const value = e.target.value;
-      fetchData(1, value, statusFilter);
-    }, 1000);
   };
 
   const handleStatusChange = (selectedOption) => {
     const value = selectedOption ? selectedOption.value : "all";
     setStatusFilter(value);
     setCurrentPage(1);
-    fetchData(1, searchTerm, value);
+    fetchData(1, debouncedSearch, value);
   };
 
   const handlePageChange = (page) => {
